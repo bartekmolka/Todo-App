@@ -10,14 +10,14 @@ import (
 )
 
 type Body struct {
-	Task   string `json:"task"`
+	Name   string `json:"name"`
 	Date   string `json:"date"`
 	IsDone bool   `json:"isDone"`
 }
 
-func GetTasks(c *gin.Context) {
+func GetTasksToDo(c *gin.Context) {
 	tasks := []models.Task{}
-	config.DB.Raw("SELECT * FROM tasks ORDER BY id").Scan(&tasks)
+	config.DB.Raw("SELECT * FROM tasks WHERE is_done=false ORDER BY id").Scan(&tasks)
 	c.JSON(200, &tasks)
 }
 
@@ -32,20 +32,21 @@ func CreateTask(c *gin.Context) {
 func DeleteTask(c *gin.Context) {
 	var task models.Task
 	config.DB.Raw("DELETE FROM tasks WHERE id = ?", c.Param("id")).Scan(&task)
-	fmt.Println(&task)
 	c.JSON(200, &task)
 }
 
 func UpdateTask(c *gin.Context) {
-	var task models.Task
-	config.DB.Where("id = ?", c.Param("id")).First(&task)
-	c.BindJSON(&task)
+	var body Body
+	c.BindJSON(&body)
 
-	// config.DB.Save(&task) OR:
-	config.DB.Model(&task).Updates(models.Task{
-		Task:   task.Task,
-		Date:   task.Date,
-		IsDone: task.IsDone,
+	fmt.Println(body.IsDone)
+	var task models.Task
+	config.DB.First(&task, c.Param("id"))
+
+	config.DB.Model(&task).Updates(map[string]interface{}{
+		"Name":   body.Name,
+		"Date":   body.Date,
+		"IsDone": body.IsDone,
 	})
 
 	c.JSON(200, &task)
@@ -53,6 +54,6 @@ func UpdateTask(c *gin.Context) {
 
 func GetDoneTasks(c *gin.Context) {
 	tasks := []models.Task{}
-	config.DB.Where("isDone = ?", true).Find(&tasks)
+	config.DB.Where("is_done = ?", true).Find(&tasks)
 	c.JSON(200, &tasks)
 }

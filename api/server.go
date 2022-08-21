@@ -17,6 +17,6 @@ func main() {
 
 	config.Connect()
 
-	routes.UserRoute(router)
+	routes.TaskRoute(router)
 
 }
