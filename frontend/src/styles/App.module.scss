@@ -1,0 +1,238 @@
+@import 'variables.scss';
+
+@mixin button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@mixin form-button {
+    @include button;
+    font-size: 1.2em;
+    font-weight: 400;
+    padding: 1vh 3vh;
+    background-color: rgb(53, 53, 53);
+    color: white;
+    position: relative;
+    border-radius: $radius;
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 5vh;
+    font-family: $font-family;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $font-color;
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 10vh;
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5vh;
+}
+
+main {
+    width: 55vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5vh;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: $small-gap;
+    width: 100%;
+    position: relative;
+
+    &>div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: $small-gap;
+
+        & > button {
+            height: calc(100% - $small-gap);
+        }
+    }
+
+    @media screen and (max-width: 456px) {
+
+        &>div,
+        &>button {
+            width: 100%;
+        }
+
+    }
+
+    @media screen and (max-width: 768px) {
+        & {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+    }
+
+    & input {
+        width: 100%;
+        outline: none;
+        caret-color: $secondary;
+        background-color: $primary;
+        border: 1px white solid;
+        padding-bottom: 1vh;
+        transition: all $duration ease;
+        font-size: 1em;
+        color: white;
+        padding: 10px;
+        border-radius: $radius;
+    }
+
+    & input[type="datetime-local"] {
+        order: 1;
+    }
+
+    & span {
+        z-index: 0;
+        position: absolute;
+        left: 0;
+        padding: $small-gap;
+        pointer-events: none;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+        transition: $duration;
+    }
+
+    & input:focus,
+    & input:valid {
+        border-color: $secondary;
+
+        &+span {
+            color: $secondary;
+            border-radius: $radius;
+            font-size: 0.8em;
+            padding: 0 $small-gap;
+            background-color: $primary;
+            transform: translateX($small-gap) translateY(-7px);
+        }
+    }
+
+    & button[type="submit"] {
+        @include form-button;
+
+        &+button[type="reset"] {
+            @include form-button;
+            order: 2;
+        }
+
+        &>p {
+            background-image: linear-gradient(90deg, $secondary, $third);
+            background-clip: text;
+            color: transparent;
+        }
+
+        &:hover>p {
+            transform: scaleY(1);
+            transform-origin: left;
+            transition: transform $duration;
+        }
+    }
+
+    &~div {
+        width: 100%;
+    }
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: $small-gap;
+
+    &>.task {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: $small-gap;
+        justify-content: space-between;
+        width: 100%;
+        position: relative;
+        border-radius: $radius;
+        background-color: $additional;
+        font-size: 1em;
+        color: white;
+        gap: $small-gap;
+
+        &>.buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: $small-gap;
+            position: relative;
+            border-radius: $radius;
+            background-color: rgb(71, 71, 71);
+            font-size: 1em;
+            color: $font-color;
+
+            // &>:nth-child(1) {
+            //     @include button;
+            //     background-color: transparent;
+            //     color: $done;
+            //     padding: $small-gap;
+            // }
+
+            &>:nth-child(1) {
+                @include button;
+                color: $secondary;
+                background-color: transparent;
+                padding: $small-gap;
+            }
+
+            &>:nth-child(2) {
+                @include button;
+                color: $third;
+                background-color: transparent;
+                padding: $small-gap;
+            }
+        }
+
+        @media screen and (max-width:456px) {
+            &>.buttons {
+                width: 100%;
+                justify-content: space-evenly;
+            }
+        }
+    }
+
+}

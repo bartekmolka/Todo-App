@@ -1,0 +1,35 @@
+//colors
+$primary: rgb(36, 36, 36);
+$secondary: rgb(63, 88, 255);
+$third: rgb(228, 31, 31);
+$additional: rgb(71, 71, 71);
+$done: rgb(0, 128, 0);
+$font-color: whitesmoke;
+
+//fonts
+$font-family: 'Roboto', sans-serif;
+
+//others
+$duration: 0.3s;
+$radius: 5px;
+$small-gap: 10px;
+
+@mixin button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@mixin form-button {
+    @include button;
+    font-size: 1.2em;
+    font-weight: 400;
+    padding: 1vh 3vh;
+    background-color: rgb(53, 53, 53);
+    color: white;
+    position: relative;
+    border-radius: $radius;
+    width: 100%;
+}

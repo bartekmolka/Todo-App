@@ -1,0 +1,60 @@
+@import '_variables.scss';
+
+.task {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $small-gap;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    border-radius: $radius;
+    background-color: $additional;
+    font-size: 1em;
+    color: white;
+    gap: $small-gap;
+
+    &>.buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: $small-gap;
+        position: relative;
+        border-radius: $radius;
+        background-color: rgb(71, 71, 71);
+        font-size: 1em;
+        color: $font-color;
+
+        &>:nth-child(1) {
+            @include button;
+            background-color: transparent;
+            color: $done;
+            padding: $small-gap;
+        }
+
+        &>:nth-child(2) {
+            @include button;
+            color: $secondary;
+            background-color: transparent;
+            padding: $small-gap;
+        }
+
+        &>:nth-child(3) {
+            @include button;
+            color: $third;
+            background-color: transparent;
+            padding: $small-gap;
+        }
+    }
+
+    @media screen and (max-width:456px) {
+        &>.buttons {
+            width: 100%;
+            justify-content: space-evenly;
+        }
+    }
+}
