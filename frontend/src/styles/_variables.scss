@@ -1,9 +1,9 @@
 //colors
 $primary: rgb(36, 36, 36);
-$secondary: rgb(63, 88, 255);
-$third: rgb(228, 31, 31);
+$secondary: rgb(28, 51, 181);
+$third: rgb(174, 16, 16);
 $additional: rgb(71, 71, 71);
-$done: rgb(0, 128, 0);
+$done: #008000;
 $font-color: whitesmoke;
 
 //fonts
@@ -32,4 +32,16 @@ $small-gap: 10px;
     position: relative;
     border-radius: $radius;
     width: 100%;
+}
+
+.done{
+    color: $done;
+}
+
+.edit {
+    color: $secondary;
+}
+
+.del {
+    color: $third;
 }

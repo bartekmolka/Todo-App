@@ -43,11 +43,17 @@ func UpdateTask(c *gin.Context) {
 	var task models.Task
 	config.DB.First(&task, c.Param("id"))
 
-	config.DB.Model(&task).Updates(map[string]interface{}{
-		"Name":   body.Name,
-		"Date":   body.Date,
-		"IsDone": body.IsDone,
-	})
+	if body.Name != "" {
+		task.Name = body.Name
+	}
+	if body.Date != "" {
+		task.Date = body.Date
+	}
+	if body.IsDone != task.IsDone {
+		task.IsDone = body.IsDone
+	}
+
+	config.DB.Save(&task)
 
 	c.JSON(200, &task)
 }
@@ -56,4 +62,10 @@ func GetDoneTasks(c *gin.Context) {
 	tasks := []models.Task{}
 	config.DB.Where("is_done = ?", true).Find(&tasks)
 	c.JSON(200, &tasks)
+}
+
+func GetTaskById(c *gin.Context) {
+	var task models.Task
+	config.DB.First(&task, c.Param("id"))
+	c.JSON(200, &task)
 }

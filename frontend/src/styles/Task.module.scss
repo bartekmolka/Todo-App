@@ -32,20 +32,17 @@
         &>:nth-child(1) {
             @include button;
             background-color: transparent;
-            color: $done;
             padding: $small-gap;
         }
 
         &>:nth-child(2) {
             @include button;
-            color: $secondary;
             background-color: transparent;
             padding: $small-gap;
         }
 
         &>:nth-child(3) {
             @include button;
-            color: $third;
             background-color: transparent;
             padding: $small-gap;
         }

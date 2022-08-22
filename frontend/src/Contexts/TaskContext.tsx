@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-import { Task as TaskType } from '../Types/TaskType'
+import { TaskType } from '../Types/TaskType'
 
 type TaskContextType = {
     tasks: TaskType[],
@@ -10,6 +10,8 @@ type TaskContextType = {
     setValues: (values: {}) => void,
     isEditing: boolean,
     setIsEditing: (isEditing: boolean) => void,
+    doneTasks: TaskType[],
+    setDoneTasks: (doneTask: TaskType[]) => void,
     taskRef: any,
     dateRef: any,
     id: number,
@@ -18,15 +20,16 @@ type TaskContextType = {
 
 const TaskContext = React.createContext({} as TaskContextType)
 
-export const useTaskContext = () => useContext(TaskContext) 
+export const useTaskContext = () => useContext(TaskContext)
 
 type TaskProviderProps = {
     children: React.ReactNode
 }
 
 export default function TaskContextProvider({ children }: TaskProviderProps) {
+    const [tasks, setTasks] = useLocalStorage('tasks', [])
+    const [doneTasks, setDoneTasks] = useLocalStorage('doneTasks', [])
     const [values, setValues] = useState({})
-    const [tasks, setTasks] = useLocalStorage('tasks', {})
     const [isEditing, setIsEditing] = useState(false);
 
     const taskRef = useRef<any>();
@@ -34,7 +37,7 @@ export default function TaskContextProvider({ children }: TaskProviderProps) {
     const [id, setId] = useState<number>(0);
 
     return (
-        <TaskContext.Provider value={{tasks,setTasks,values,setValues,isEditing,setIsEditing,taskRef,dateRef,id,setId}}>
+        <TaskContext.Provider value={{ tasks, setTasks, values, setValues, isEditing, setIsEditing, taskRef, dateRef, id, setId, doneTasks,setDoneTasks}}>
             {children}
         </TaskContext.Provider>
     )

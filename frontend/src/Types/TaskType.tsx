@@ -1,8 +1,9 @@
-export type Task = {
+export type TaskType = {
     ID: number
     CreatedAt: string
     UpdatedAt: string
     DeletedAt: string
-    task: string
+    name: string
     date: string
+    isDone: boolean
   }

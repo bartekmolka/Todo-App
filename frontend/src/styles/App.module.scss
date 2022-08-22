@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import '_variables.scss';
 
 @mixin button {
     outline: none;
@@ -62,114 +62,6 @@ main {
     gap: 5vh;
 }
 
-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: $small-gap;
-    width: 100%;
-    position: relative;
-
-    &>div {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: $small-gap;
-
-        & > button {
-            height: calc(100% - $small-gap);
-        }
-    }
-
-    @media screen and (max-width: 456px) {
-
-        &>div,
-        &>button {
-            width: 100%;
-        }
-
-    }
-
-    @media screen and (max-width: 768px) {
-        & {
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-    }
-
-    & input {
-        width: 100%;
-        outline: none;
-        caret-color: $secondary;
-        background-color: $primary;
-        border: 1px white solid;
-        padding-bottom: 1vh;
-        transition: all $duration ease;
-        font-size: 1em;
-        color: white;
-        padding: 10px;
-        border-radius: $radius;
-    }
-
-    & input[type="datetime-local"] {
-        order: 1;
-    }
-
-    & span {
-        z-index: 0;
-        position: absolute;
-        left: 0;
-        padding: $small-gap;
-        pointer-events: none;
-        font-size: 1em;
-        color: white;
-        text-transform: uppercase;
-        transition: $duration;
-    }
-
-    & input:focus,
-    & input:valid {
-        border-color: $secondary;
-
-        &+span {
-            color: $secondary;
-            border-radius: $radius;
-            font-size: 0.8em;
-            padding: 0 $small-gap;
-            background-color: $primary;
-            transform: translateX($small-gap) translateY(-7px);
-        }
-    }
-
-    & button[type="submit"] {
-        @include form-button;
-
-        &+button[type="reset"] {
-            @include form-button;
-            order: 2;
-        }
-
-        &>p {
-            background-image: linear-gradient(90deg, $secondary, $third);
-            background-clip: text;
-            color: transparent;
-        }
-
-        &:hover>p {
-            transform: scaleY(1);
-            transform-origin: left;
-            transition: transform $duration;
-        }
-    }
-
-    &~div {
-        width: 100%;
-    }
-}
-
 .tasks {
     display: flex;
     flex-direction: column;
@@ -205,23 +97,8 @@ form {
             font-size: 1em;
             color: $font-color;
 
-            // &>:nth-child(1) {
-            //     @include button;
-            //     background-color: transparent;
-            //     color: $done;
-            //     padding: $small-gap;
-            // }
-
-            &>:nth-child(1) {
+            &>button {
                 @include button;
-                color: $secondary;
-                background-color: transparent;
-                padding: $small-gap;
-            }
-
-            &>:nth-child(2) {
-                @include button;
-                color: $third;
                 background-color: transparent;
                 padding: $small-gap;
             }
