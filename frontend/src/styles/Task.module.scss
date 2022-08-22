@@ -16,6 +16,10 @@
     color: white;
     gap: $small-gap;
 
+    &>div {
+        width: calc(33% - $small-gap);
+    }
+
     &>.buttons {
         display: flex;
         flex-direction: row;
@@ -47,10 +51,25 @@
             padding: $small-gap;
         }
     }
+    
+    @media screen and (max-width:756px) {
+        & {
+            width: auto;
 
-    @media screen and (max-width:456px) {
+        }
+
+        &>div {
+            width: auto;
+
+        }
+
         &>.buttons {
             width: 100%;
+        }
+    }
+
+    @media screen and (max-width:1512px) {
+        &>.buttons {
             justify-content: space-evenly;
         }
     }

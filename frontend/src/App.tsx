@@ -1,56 +1,57 @@
-import axios from 'axios'
-import { MouseEvent, useEffect, useRef, useState } from 'react'
-import * as styles from './styles/App.module.scss'
-
-import { TaskType } from './Types/TaskType'
 import { Task } from './components/Task'
-import { useTaskContext } from './Contexts/TaskContext'
+import { useTaskContext } from './contexts/TaskContext'
 import { Form } from './components/Form'
 import { DoneTask } from './components/DoneTask'
+import * as styles from './styles/App.module.scss'
+import { TaskType } from './types/TaskType'
+import axios from 'axios'
 
 export const App = () => {
-  const {tasks, setTasks, doneTasks, setDoneTasks} = useTaskContext()
+  const { tasks, doneTasks, setTasks } = useTaskContext()
 
-  async function handleDelete(e: MouseEvent<HTMLButtonElement>, id: number) {
-    e.preventDefault()
-    await axios.delete(`http://localhost:3000/${id}`)
-      .then(() => setTasks(tasks.filter((task: { ID: number }) => task.ID !== id)))
-      .then(() => setDoneTasks(doneTasks.filter((doneTask: { ID: number }) => doneTask.ID !== id)))
-
+  const loadAllTasks = async () => {
+    await axios.get('http://localhost:3000/').then(res => setTasks(res.data))
   }
 
-  const handleUnDone = async (e: MouseEvent<HTMLButtonElement>, TASK: TaskType) => {
-    e.preventDefault()
+  const loadTodayTasks = async () => {
+    await axios.get('http://localhost:3000/day').then(res => setTasks(res.data))
+  }
 
-    axios.put(`http://localhost:3000/${TASK.ID}`, JSON.stringify({
-      "name": TASK.name,
-      "date": TASK.date,
-      "isDone": false
-    }))
+  const loadTomorrowTasks = async () => {
+    await axios.get('http://localhost:3000/tomorrow').then(res => setTasks(res.data))
+  }
 
-    setTasks([...tasks, TASK])
-    setDoneTasks(doneTasks.filter((doneTask: { ID: number }) => doneTask.ID !== TASK.ID))
+  const loadWeekTasks = async () => {
+    await axios.get('http://localhost:3000/week').then(res => setTasks(res.data))
+  }
+
+  const loadMonthTasks = async () => {
+    await axios.get('http://localhost:3000/month').then(res => setTasks(res.data))
   }
 
   return (
     <div className={styles.wrapper}>
       <h1>List of tasks 📖</h1>
       <main className={styles.main}>
-        <Form/>
-        <div>
-          <h2>Tasks to do</h2>
-          <div className={styles.tasks}>
-            {tasks?.map((task: TaskType) => (
-             <Task {...task}/>
-            ))}
-          </div>
+        <Form />
+        <div className={styles.filters}>
+          <button onClick={() => loadAllTasks()}>All</button>
+          <button onClick={() => loadTodayTasks()}>Today</button>
+          <button onClick={() => loadTomorrowTasks()}>Tomorrow</button>
+          <button onClick={() => loadWeekTasks()}>Week</button>
+          <button onClick={() => loadMonthTasks()}>Month</button>
+        </div>
+        <div className={styles.tasks}>
+          {tasks?.map((task: TaskType) => (
+            <Task {...task} />
+          ))}
         </div>
 
         <div>
           <h2>Done tasks</h2>
           <div className={styles.tasks}>
             {doneTasks && doneTasks.map((doneTask: TaskType) => (
-              <DoneTask {...doneTask}/>
+              <DoneTask {...doneTask} />
             ))}
           </div>
         </div>

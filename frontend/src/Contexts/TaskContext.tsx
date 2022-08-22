@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-import { TaskType } from '../Types/TaskType'
+import { TaskType } from '../types/TaskType'
 
 type TaskContextType = {
     tasks: TaskType[],

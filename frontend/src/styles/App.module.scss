@@ -50,7 +50,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 5vh;
+    gap: $big-gap;
 }
 
 main {
@@ -62,54 +62,42 @@ main {
     gap: 5vh;
 }
 
+.filters {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: calc($big-gap - 1vh);
+
+    &>button {
+        @include button;
+        background-color: $primary;
+        color: white;
+        border: 1px solid $primary;
+        border: 3px solid $additional;
+        padding: 1vh 3vh;
+        border-radius: $radius;
+        font-size: 1.2em;
+        font-weight: 400;
+        width: auto;
+
+        @media screen and (max-width: 456px) {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 1400px) {
+        justify-content: flex-start;
+    }
+
+}
+
+
 .tasks {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: $small-gap;
-
-    &>.task {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: $small-gap;
-        justify-content: space-between;
-        width: 100%;
-        position: relative;
-        border-radius: $radius;
-        background-color: $additional;
-        font-size: 1em;
-        color: white;
-        gap: $small-gap;
-
-        &>.buttons {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: $small-gap;
-            position: relative;
-            border-radius: $radius;
-            background-color: rgb(71, 71, 71);
-            font-size: 1em;
-            color: $font-color;
-
-            &>button {
-                @include button;
-                background-color: transparent;
-                padding: $small-gap;
-            }
-        }
-
-        @media screen and (max-width:456px) {
-            &>.buttons {
-                width: 100%;
-                justify-content: space-evenly;
-            }
-        }
-    }
-
 }

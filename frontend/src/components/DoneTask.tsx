@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import { useTaskContext } from '../Contexts/TaskContext'
-import { TaskType } from '../Types/TaskType'
+import { useTaskContext } from '../contexts/TaskContext'
+import { TaskType } from '../types/TaskType'
 
 import * as styles from '../styles/Task.module.scss'
 

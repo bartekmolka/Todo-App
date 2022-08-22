@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef } from "react";
-import { useTaskContext } from "../Contexts/TaskContext"
+import { useTaskContext } from "../contexts/TaskContext"
 import { clearForm } from "../utils/clearForm";
 import * as styles from "../styles/Form.module.scss";
 
@@ -48,7 +48,7 @@ export const Form = () => {
                     <input type="text" ref={taskRef} name="name" required onChange={e => handleChange(e)} />
                     <span >Task </span>
                 </div>
-                <input type="datetime-local" ref={dateRef} name="date" required onChange={e => handleChange(e)} />
+                <input type="date" ref={dateRef} name="date" required onChange={e => handleChange(e)} />
             </div>
             <div>
                 {isEditing ? (

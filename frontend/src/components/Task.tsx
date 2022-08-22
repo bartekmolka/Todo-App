@@ -1,8 +1,8 @@
-import { useTaskContext } from '../Contexts/TaskContext'
+import { useTaskContext } from '../contexts/TaskContext'
 import axios from 'axios'
 import * as styles from '../styles/Task.module.scss'
 
-import { Task as TaskType } from '../Types/TaskType'
+import { TaskType } from '../types/TaskType'
 import { formatDate } from '../utils/formatDate'
 
 export const Task = (task: TaskType) => {
