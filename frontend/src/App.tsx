@@ -41,10 +41,13 @@ export const App = () => {
           <button onClick={() => loadWeekTasks()}>Week</button>
           <button onClick={() => loadMonthTasks()}>Month</button>
         </div>
-        <div className={styles.tasks}>
-          {tasks?.map((task: TaskType) => (
-            <Task {...task} />
-          ))}
+        <div>
+          <h2>Tasks to do</h2>
+          <div className={styles.tasks}>
+            {tasks?.map((task: TaskType) => (
+              <Task {...task} />
+            ))}
+          </div>
         </div>
 
         <div>

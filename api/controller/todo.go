@@ -72,19 +72,19 @@ func GetDoneTasks(c *gin.Context) {
 
 func TodayTasks(c *gin.Context) {
 	var tasks []models.Task
-	config.DB.Where("date = ?", time.Now().Format(dateFormat)).Find(&tasks)
+	config.DB.Where("is_done= ? AND date = ?", false, time.Now().Format(dateFormat)).Find(&tasks)
 	c.JSON(200, &tasks)
 }
 
 func TomorrowTasks(c *gin.Context) {
 	var tasks []models.Task
-	config.DB.Where("date = ?", time.Now().AddDate(0, 0, 1).Format(dateFormat)).Find(&tasks)
+	config.DB.Where("is_done= ? AND date = ?", false, time.Now().AddDate(0, 0, 1).Format(dateFormat)).Find(&tasks)
 	c.JSON(200, &tasks)
 }
 
 func WeekTasks(c *gin.Context) {
 	var tasks []models.Task
-	config.DB.Where("date <= ? AND date >= ?", time.Now().AddDate(0, 0, 7), time.Now().Format(dateFormat)).Find(&tasks)
+	config.DB.Where("is_done= ? AND date <= ? AND date >= ?", false, time.Now().AddDate(0, 0, 7), time.Now().Format(dateFormat)).Find(&tasks)
 	c.JSON(200, &tasks)
 }
 
