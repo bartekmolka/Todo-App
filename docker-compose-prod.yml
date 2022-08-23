@@ -14,17 +14,18 @@ services:
     restart: unless-stopped
     networks:
       - todo
-  
+    env_file:
+      - .env
+
   server:
     build: ./api
     container_name: api
     env_file:
-      - .env
+      - ./api/.env
     volumes:
       - ./api/data/db:/var/lib/postgresql/data
     ports:
       - "3000:3000"
-    restart: unless-stopped
     depends_on:
       - database
     networks:
@@ -38,6 +39,9 @@ services:
     restart: unless-stopped
     networks:
       - todo
+    depends_on:
+      - database
+      - server
 
 networks:
   todo:

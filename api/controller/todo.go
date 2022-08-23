@@ -90,6 +90,6 @@ func WeekTasks(c *gin.Context) {
 
 func MonthTasks(c *gin.Context) {
 	var tasks []models.Task
-	config.DB.Where("date <= ? AND date >= ?", time.Now().AddDate(0, 1, 0), time.Now().Format(dateFormat)).Find(&tasks)
+	config.DB.Where("is_done= ? AND date <= ? AND date >= ?", false, time.Now().AddDate(0, 1, 0), time.Now().Format(dateFormat)).Find(&tasks)
 	c.JSON(200, &tasks)
 }
