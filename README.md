@@ -41,11 +41,6 @@ And start it by:
 yarn dev
 ```
 
-
-## Testing
-
-
-
 ---
 
 ©bartekmolka 2022
