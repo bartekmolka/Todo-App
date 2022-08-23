@@ -5,7 +5,9 @@
 ---
 
 ## Preview: 
-preview.png
+<img width="840" alt="Zrzut ekranu 2022-08-22 o 18 56 17" src="https://user-images.githubusercontent.com/74304320/186160448-37719fe9-ab2c-457f-8ec4-9283fedb50da.png">
+
+---
 
 ## Running project
 
