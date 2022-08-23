@@ -5,7 +5,7 @@
 ---
 
 ## Preview: 
-!!image[preview.png]
+[preview.png]
 
 ## Running project
 
