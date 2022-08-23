@@ -2,7 +2,7 @@ version: 4:10.1
 services:
   db:
     image: postgres:latest
-    container_name: postgres
+    container_name: database
     volumes: 
       - ./api/data/db:/var/lib/postgresql/data
     ports:
@@ -12,21 +12,3 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     restart: unless-stopped
-  
-  # api:
-  #   build: ./api
-  #   container_name: api
-  #   volumes:
-  #     - ./api/data/db:/var/lib/postgresql/data
-  #   ports:
-  #     - "3000:3000"
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - db
-  
-  # web:
-  #   build: ./frontend
-  #   container_name: web
-  #   ports:      
-  #     - "8081:8081"
-  #   restart: unless-stopped

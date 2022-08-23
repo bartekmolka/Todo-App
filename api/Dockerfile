@@ -3,8 +3,7 @@ WORKDIR /app
 
 FROM golang:1.18.3-alpine AS build
 WORKDIR /src
-COPY go.mod .
-COPY go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 RUN go build -o /src/build/app
@@ -14,4 +13,4 @@ WORKDIR /app
 COPY --from=build /src/build .
 RUN chmod +x ./app
 EXPOSE 3000
-ENTRYPOINT ["./app"]
+CMD ["./app"]
